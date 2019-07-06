@@ -31,6 +31,7 @@ app.post("/campgrounds", function(req, res){
 });
 
 app.get("/campgrounds/new", function(req, res){
+    //Shows the form to add a new campground
     res.render("new");
 });
 
