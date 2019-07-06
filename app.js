@@ -24,6 +24,10 @@ app.post("/campgrounds", function(req, res){
     //redirect back to campgrounds page
 });
 
+app.get("/campgrounds/new", function(req, res){
+    res.render("new");
+});
+
 app.listen(3000, process.env.IP, function () {
     console.log("The YelpCamp Server has started!");
 });
