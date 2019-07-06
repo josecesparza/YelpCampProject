@@ -3,10 +3,20 @@ var app = express();
 
 app.set("view engine", "ejs");
 
-app.get("/", function(req, res){
+app.get("/", function (req, res) {
     res.render("landing");
 });
 
-app.listen(3000, process.env.IP, function(){
+app.get("/campgrounds", function (req, res) {
+    var campgrounds = [
+        { name: "Salmon Creek", image: "https://pixabay.com/get/5fe8d1434852b108f5d084609620367d1c3ed9e04e50744f772c78d0944cc5_340.jpg" },
+        { name: "Granite Hill", image: "https://pixabay.com/get/57e1d14a4e52ae14f6da8c7dda793f7f1636dfe2564c704c732d78d7934ec458_340.jpg" },
+        { name: "Mountain Goat's Rest", image: "https://pixabay.com/get/57e8d1454b56ae14f6da8c7dda793f7f1636dfe2564c704c732d78d7934ec458_340.jpg" }
+    ]
+
+    res.render("campgrounds");
+});
+
+app.listen(3000, process.env.IP, function () {
     console.log("The YelpCamp Server has started!");
 });
