@@ -71,8 +71,15 @@ app.get("/campgrounds/new", function(req, res){
 //SHOW - Show page of each campground, show more info about one campground
 app.get("/campgrounds/:id", function(req, res){
     //Find campground with provited ID
-    //Render show template with that campground
-    res.render("show");
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log(err);
+        }else{
+            //Render show template with that campground
+            console.log("ButtonMoreInfo: Campground Found It");
+            res.render("show", {campground: foundCampground});
+        }
+    });
 });
 
 app.listen(3000, process.env.IP, function () {
