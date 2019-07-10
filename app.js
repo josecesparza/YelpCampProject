@@ -68,11 +68,11 @@ app.get("/campgrounds/new", function(req, res){
     res.render("new");
 });
 
-//SHOW - Show page of each campground
+//SHOW - Show page of each campground, show more info about one campground
 app.get("/campgrounds/:id", function(req, res){
     //Find campground with provited ID
     //Render show template with that campground
-    res.send("This will be the show page");
+    res.render("show");
 });
 
 app.listen(3000, process.env.IP, function () {
