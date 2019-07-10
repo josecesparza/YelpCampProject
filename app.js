@@ -10,7 +10,8 @@ app.set("view engine", "ejs");
 //Schema Setup
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description, String
 }); 
 
 var Campground = mongoose.model("Campground", campgroundSchema);
