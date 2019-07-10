@@ -31,8 +31,9 @@ app.get("/", function (req, res) {
     res.render("landing");
 });
 
+//INDEX - Show all campgrounds
 app.get("/campgrounds", function (req, res) {
-    //Get all campgrounds from db
+    //Get all campgrounds from DB
     Campground.find({}, function(err, allcampgrounds){
         if(err){
             console.log(err);
@@ -42,6 +43,7 @@ app.get("/campgrounds", function (req, res) {
     });
 });
 
+//CREATE - Add new campground to DB
 app.post("/campgrounds", function(req, res){
     //get data from form and add to campgrounds array
     var name = req.body.name;
@@ -58,9 +60,17 @@ app.post("/campgrounds", function(req, res){
     });
 });
 
+//NEW - Show form to create a new campground
 app.get("/campgrounds/new", function(req, res){
     //Shows the form to add a new campground
     res.render("new");
+});
+
+//SHOW - Show page of each campground
+app.get("/campgrounds/:id", function(req, res){
+    //Find campground with provited ID
+    //Render show template with that campground
+    res.send("This will be the show page");
 });
 
 app.listen(3000, process.env.IP, function () {
