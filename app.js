@@ -11,14 +11,15 @@ app.set("view engine", "ejs");
 var campgroundSchema = new mongoose.Schema({
     name: String,
     image: String,
-    description, String
+    description: String
 }); 
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 
 /*Campground.create({ 
     name: "Granite Hill", 
-    image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" 
+    image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+    description: "This is a huge granite hill, no bathrooms. No water. Beautiful granite!"
 }, function(err, campground){
     if(err){
         console.log(err);
