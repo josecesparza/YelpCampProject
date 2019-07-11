@@ -50,7 +50,8 @@ app.post("/campgrounds", function(req, res){
     //get data from form and add to campgrounds array
     var name = req.body.name;
     var image = req.body.image;
-    var newCampground = {name: name, image: image};
+    var desc = req.body.description;
+    var newCampground = {name: name, image: image, description: desc};
     //Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
@@ -76,7 +77,6 @@ app.get("/campgrounds/:id", function(req, res){
             console.log(err);
         }else{
             //Render show template with that campground
-            console.log("ButtonMoreInfo: Campground Found It");
             res.render("show", {campground: foundCampground});
         }
     });
