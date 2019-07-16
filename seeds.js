@@ -51,7 +51,6 @@ function seedDB() {
             });
         });
     });
-
     //Add a few comments
 }
 
