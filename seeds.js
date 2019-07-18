@@ -42,6 +42,7 @@ function seedDB() {
                         if(err){
                             console.log(err);
                         } else {
+                            //Add a few comments
                             campground.comments.push(comment);
                             campground.save();
                             console.log("Created new comment");
@@ -51,7 +52,7 @@ function seedDB() {
             });
         });
     });
-    //Add a few comments
+    
 }
 
 module.exports = seedDB;
