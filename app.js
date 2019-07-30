@@ -126,24 +126,41 @@ app.post("/campgrounds/:id/comments", function (req, res) {
 //AUTH ROUTES
 //========================
 //Show register form
-app.get("/register", function(req, res){
+app.get("/register", function (req, res) {
     res.render("register");
 });
 
 //Handling sign up logic 
-app.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
-    User.register(newUser, req.body.password, function(err, user){
-        if(err){
+app.post("/register", function (req, res) {
+    var newUser = new User({ username: req.body.username });
+    User.register(newUser, req.body.password, function (err, user) {
+        if (err) {
             console.log(err);
             return res.render("register");
         }
 
-        passport.authenticate("local")(req, res, function(){
+        passport.authenticate("local")(req, res, function () {
             res.redirect("/campgrounds");
         });
     });
 });
+
+
+//SHOW LOGIN FORM
+app.get("/login", function (req, res) {
+    res.render("login");
+});
+
+//Handling login logic
+//app.post("/login", middleware, callback);
+//When we call passport.authenticate we're calling a method using passport-local-mongoose
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/campgrounds",
+        failureRedirect: "/login"
+    }), function (req, res) {
+    }
+);
 
 app.listen(3000, process.env.IP, function () {
     console.log("The YelpCamp Server has started!");
