@@ -28,6 +28,13 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//This middleware function will be called on every route
+app.use(function(req, res, next){
+    //We're passing the user info
+    res.locals.currentUser = req.user;
+    next();
+});
+
 app.get("/", function (req, res) {
     res.render("landing");
 });
