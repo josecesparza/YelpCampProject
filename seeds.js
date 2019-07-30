@@ -34,25 +34,33 @@ function seedDB() {
                     console.log(err);
                 } else {
                     console.log("Added campground");
-                    //Create a comment
-                    Comment.create({
-                        text: "This is great but I wish there was Internet",
-                        author: "Homer"
-                    }, function(err, comment){
-                        if(err){
-                            console.log(err);
-                        } else {
-                            //Add a few comments
-                            campground.comments.push(comment);
-                            campground.save();
-                            console.log("Created new comment");
+                    //Remove all comments
+                    Comment.remove({}, function (err) {
+                        if (err) {
+                            return console.log(err);
                         }
+                        console.log("Comments removed");
+                        //Create a comment
+                        Comment.create({
+                            text: "This is great but I wish there was Internet",
+                            author: "Homer"
+                        }, function (err, comment) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                //Add a few comments
+                                campground.comments.push(comment);
+                                campground.save();
+                                console.log("Created new comment");
+                            }
+                        });
                     });
+
                 }
             });
         });
     });
-    
+
 }
 
 module.exports = seedDB;
