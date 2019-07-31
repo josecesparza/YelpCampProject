@@ -22,7 +22,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 
 //Seed the database
-// seedDB();
+//seedDB();
 
 //PASSPORT CONFIG
 app.use(require('express-session')({
