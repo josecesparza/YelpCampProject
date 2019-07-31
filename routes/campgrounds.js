@@ -15,7 +15,7 @@ router.get("/", function (req, res) {
 });
 
 //CREATE - Add new campground to DB
-router.post("/", isLoggedIn,function (req, res) {
+router.post("/", isLoggedIn, function (req, res) {
     //get data from form and add to campgrounds array
     var name = req.body.name;
     var image = req.body.image;
@@ -38,7 +38,7 @@ router.post("/", isLoggedIn,function (req, res) {
 });
 
 //NEW - Show form to create a new campground
-router.get("/new", isLoggedIn,function (req, res) {
+router.get("/new", isLoggedIn, function (req, res) {
     //Shows the form to add a new campground
     res.render("campgrounds/new");
 });
@@ -53,6 +53,30 @@ router.get("/:id", function (req, res) {
             console.log("Campground Founded: " + foundCampground.name);
             //Render show template with that campground
             res.render("campgrounds/show", { campground: foundCampground });
+        }
+    });
+});
+
+//EDIT CAMPGROUND 
+router.get("/:id/edit", function (req, res) {
+    Campground.findById(req.params.id, function (err, foundCampground) {
+        if (err) {
+            res.redirect("/campgrounds");
+        } else {
+            res.render("campgrounds/edit", { campground: foundCampground });
+        }
+    })
+});
+
+//UPDATE CAMPGROUND
+router.put("/:id", function (req, res) {
+    //Find and update the correct campground
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function (err, updateCampground) {
+        if (err) {
+            res.redirect("/campgrounds");
+        } else {
+            //Redirect to show page
+            res.redirect("/campgrounds/" + req.params.id);
         }
     });
 });
