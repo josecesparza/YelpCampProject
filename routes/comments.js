@@ -39,13 +39,26 @@ router.post("/", isLoggedIn, function (req, res) {
                     campground.comments.push(comment);
                     campground.save();
                     console.log(comment);
-                    
+
                     //Redirect to campground show page
                     res.redirect("/campgrounds/" + campground._id);
                 }
             });
         }
     });
+});
+
+//EDIT ROUTE
+router.get("/:comment_id/edit", function (req, res) {
+    Comment.findById(req.params.comment_id, function (err, foundComment) {
+        if (err) {
+            res.redirect("back");
+        } else {
+            res.render("comments/edit", { campground_id: req.params.id, comment: foundComment });
+
+        }
+    });
+
 });
 
 //Middleware
