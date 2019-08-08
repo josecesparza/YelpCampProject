@@ -1,0 +1,9 @@
+<% include ../partials/header %>
+
+<h1><%=  foundUser.username %>'s Profile</h1>
+
+<% if(currentUser && currentUser._id.equals(foundUser._id)){ %>
+    <p>You can edit this user profile</p>
+<% } %>    
+
+<% include ../partials/footer %>

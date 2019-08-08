@@ -12,6 +12,7 @@ var express = require('express'),
 //Requiring Routes
 var commentRoutes = require('./routes/comments'),
     campgroundRoutes = require('./routes/campgrounds'),
+    userRoutes = require('./routes/users'),
     indexRoutes = require('./routes/index');
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
@@ -50,6 +51,7 @@ app.use("/", indexRoutes);
 //All routes in campgroundRoutes start with /campgrounds by default
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/user", userRoutes);
 
 app.listen(3000, process.env.IP, function () {
     console.log("The YelpCamp Server has started!");
