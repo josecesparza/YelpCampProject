@@ -1,9 +1,27 @@
 <% include ../partials/header %>
+<div class="container">
+    <%  if(foundUser){ %>
+    <h1><%=  foundUser.username %>'s Profile</h1>
 
-<h1><%=  foundUser.username %>'s Profile</h1>
+    <div class="list-group col-lg-4">
+        <li class="list-group-item">Username: <%=  foundUser.username %></li>
+        <li class="list-group-item">Name: <%  if(foundUser.name){ %>
+            <%= foundUser.name %>
+            <% } %></li>
+        <li class="list-group-item">Surname: <%  if(foundUser.surnames){ %>
+            <%= foundUser.surnames %>
+            <% } %></li>
+        <% if(currentUser && currentUser._id.equals(foundUser._id)){ %>
+        <a href="" class="btn btn-xs btn-warning">Edit</a>
+        <form class="delete-form" action="/user/<%= foundUser._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-xs btn-danger">Delete</button>
+        </form>
+        <% } %>
+    </div>
 
-<% if(currentUser && currentUser._id.equals(foundUser._id)){ %>
-    <p>You can edit this user profile</p>
-<% } %>    
 
+    <% } else { %>
+    <h1>No founded User</h1>
+    <% } %>
+</div>
 <% include ../partials/footer %>
