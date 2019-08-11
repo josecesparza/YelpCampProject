@@ -1,5 +1,6 @@
 var Campground = require('../models/campground');
 var Comment = require('../models/comment');
+var User = require('../models/user')
 
 var middlewareObj = {};
 
@@ -45,6 +46,28 @@ middlewareObj.checkCommentOwnership = function checkCommentOwnership(req, res, n
     } else {
         req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
+    }
+};
+
+middlewareObj.checkUserOwnership = function checkUserOwnership(req, res, next) {
+    if (req.isAuthenticated()) {
+        User.findById(req.params.id, function (err, foundUser) {
+            if (err || !foundUser) {
+                req.flash("error", "Sorry, that user doesn't exist!");
+                res.redirect("back");
+            } else {
+                //Does the current user own the user?
+                if (foundUser._id.equals(req.user._id) || req.user.isAdmin) {
+                    next();
+                } else {
+                    req.flash("error", "You don't have permission to do that");
+                    res.redirect("/campgrounds");
+                }
+            }
+        });
+    } else {
+        req.flash("error", "You need to be logged in to do that");
+        res.redirect("/campgrounds");
     }
 };
 
